@@ -39,6 +39,19 @@ app.use('/api/v1/comment', commentRoutes);
 
 
 
+app.get('/', (req, res) => {
+  const message = {
+    status: 'success',
+    code: 200,
+    message: 'Welcome To Blog api',
+    data:
+      mongoose.connection.readyState === 1
+        ? 'Connected to MongoDB'
+        : 'Not connected to MongoDB',
+  };
+
+  res.status(200).json(message);
+});
 
 
 app.use((req, res, next) => {
