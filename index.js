@@ -1,5 +1,6 @@
 const app = require("./app");
 const connectDatabase = require("./database/dataBase");
+const path = require("path");
 
 
 
@@ -7,6 +8,10 @@ const connectDatabase = require("./database/dataBase");
 
 connectDatabase();
 
+app.get("/", (req, res) => { 
+  app.use(express.static(path.resolve(__dirname, "frontend", "build"))); 
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html")); 
+}); 
 
 
 

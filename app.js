@@ -6,7 +6,6 @@ const logger = require("morgan");
 const ErrorHandler = require("./utils/errorHandler");
 require("dotenv").config();
 const app = express();
-const path = require("path");
 
 app.use(express.json());
 
@@ -32,10 +31,7 @@ app.use('/api/v1', authRoutes);
 app.use('/api/v1/article', articleRoutes);
 app.use('/api/v1/comment', commentRoutes);
 
-app.get("/", (req, res) => { 
-  app.use(express.static(path.resolve(__dirname, "frontend", "build"))); 
-  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html")); 
-}); 
+
 
 
 
