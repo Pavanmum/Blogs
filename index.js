@@ -3,7 +3,6 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require('cors')
 const logger = require("morgan");
-const path = require('path')
 const ErrorHandler = require("./utils/errorHandler");
 require("dotenv").config();
 const connectDatabase = require("./database/dataBase");
@@ -32,8 +31,8 @@ app.use('/api/v1/comment', commentRoutes);
 
 
 app.get("/", (req, res) => {
-  app.use(express.static(path.resolve(__dirname, "frontend", "build")));
-  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  res.send("Welcome to the Blog API");
+
 });
 
 app.use((err, req, res, next) => {
