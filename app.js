@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require('cors')
 const logger = require("morgan");
+const path = require("path");
 const ErrorHandler = require("./utils/errorHandler");
 require("dotenv").config();
 const app = express();
@@ -31,7 +32,10 @@ app.use('/api/v1', authRoutes);
 app.use('/api/v1/article', articleRoutes);
 app.use('/api/v1/comment', commentRoutes);
 
-
+app.get("/", (req, res) => { 
+  app.use(express.static(path.resolve(__dirname, "frontend", "build"))); 
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html")); 
+}); 
 
 
 
