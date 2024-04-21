@@ -1,3 +1,3 @@
 
 
-export const  DOMAIN = [ "{DOMAIN}"]
+export const  DOMAIN = [ "{window.location.origin}"]
