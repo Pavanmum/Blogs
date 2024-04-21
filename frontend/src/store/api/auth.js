@@ -3,7 +3,7 @@ import { DOMAIN } from "../constant";
 
 export const signupUser = async (name, email, password) => {
   const response = await axios.post(
-    `${DOMAIN}/api/v1/signup`,
+    `${window.location.origin}/api/v1/signup`,
     {
       name: name,
       email: email,
@@ -15,7 +15,7 @@ export const signupUser = async (name, email, password) => {
 };
 
 export const loginUser = async (email, password) => {
-  const response = await axios.post(`${DOMAIN}/api/v1/login`, {
+  const response = await axios.post(`${window.location.origin}/api/v1/login`, {
     email: email,
     password: password,
   });
