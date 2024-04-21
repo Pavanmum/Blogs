@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { fetchMyBlogsAsync } from "../store/slice/blogSlice";
 
 const DeleteModal = ({ id, isDeleteOpen, setIsDeleteOpen }) => {
+  
   // Close modal when clicking outside of it
   const handleClickOutside = (event) => {
     if (event.target.id === "popup-modal") {
@@ -17,14 +18,14 @@ const DeleteModal = ({ id, isDeleteOpen, setIsDeleteOpen }) => {
     try {
       await deleteBlog(id);
       setIsDeleteOpen(false);
-      toast.alert("Blog Deleted Successfully");
+      toast.success("Blog deleted successfully");
       dispatch(fetchMyBlogsAsync());
     } catch (error) {
       console.log(error);
     }
   };
 
-  // Add event listener when the component mounts
+
   useEffect(() => {
     if (isDeleteOpen) {
       document.addEventListener("click", handleClickOutside);
@@ -34,7 +35,7 @@ const DeleteModal = ({ id, isDeleteOpen, setIsDeleteOpen }) => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [isDeleteOpen, setIsDeleteOpen]);
+  }, [isDeleteOpen, setIsDeleteOpen,]);
 
   return (
     <div
@@ -86,7 +87,7 @@ const DeleteModal = ({ id, isDeleteOpen, setIsDeleteOpen }) => {
               />
             </svg>
             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this product?
+              Are you sure you want to delete this Blog?
             </h3>
             <button
               type="button"

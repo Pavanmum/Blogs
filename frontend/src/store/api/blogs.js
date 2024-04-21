@@ -1,9 +1,10 @@
 import axios from "axios";
+import { DOMAIN } from "../constant";
 
 export const createBlog = async (formData) => {
   const token = localStorage.getItem("token");
   const response = await fetch(
-    `${window.location.origin}/api/v1/article/create-article`,
+    `${DOMAIN}/api/v1/article/create-article`,
     {
       method: "POST",
       headers: {
@@ -21,7 +22,7 @@ export const addComment = async (comment, id) => {
   try {
     const token = localStorage.getItem("token");
     const response = await fetch(
-      `${window.location.origin}/api/v1/comment/create/${id}`,
+      `${DOMAIN}/api/v1/comment/create/${id}`,
       {
         method: "POST",
         headers: {
@@ -41,7 +42,7 @@ export const addComment = async (comment, id) => {
 
 export const fetchAllBlogs = async () => {
   const response = await axios.get(
-    `${window.location.origin}/api/v1/article/get-article`
+    `${DOMAIN}/api/v1/article/get-article`
   );
   console.log(response);
   return response;
@@ -50,7 +51,7 @@ export const fetchAllBlogs = async () => {
 export const fetchMyBlogs = async () => {
   const token = localStorage.getItem("token");
   const response = await axios.get(
-    `${window.location.origin}/api/v1/article/get-user-article`,
+    `${DOMAIN}/api/v1/article/get-user-article`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -64,7 +65,7 @@ export const fetchMyBlogs = async () => {
 export const fetchBlogsById = async (id) => {
   const token = localStorage.getItem("token");
   const response = await axios.get(
-    `${window.location.origin}/api/v1/article/get-article/${id}`,
+    `${DOMAIN}/api/v1/article/get-article/${id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -78,7 +79,7 @@ export const fetchBlogsById = async (id) => {
 export const fetchAllCommentByArticle = async (articleId) => {
   const token = localStorage.getItem("token");
   const response = await axios.get(
-    `${window.location.origin}/api/v1/comment/get/comments/${articleId}`,
+    `${DOMAIN}/api/v1/comment/get/comments/${articleId}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -92,7 +93,7 @@ export const fetchAllCommentByArticle = async (articleId) => {
 export const updateBlog = async (formData, id) => {
   const token = localStorage.getItem("token");
   const response = await fetch(
-    `${window.location.origin}/api/v1/article/update-article/${id}`,
+    `${DOMAIN}/api/v1/article/update-article/${id}`,
     {
       method: "PUT",
       headers: {
@@ -109,7 +110,7 @@ export const updateBlog = async (formData, id) => {
 export const deleteBlog = async (id) => {
   const token = localStorage.getItem("token");
   const response = await fetch(
-    `${window.location.origin}/api/v1/article/article-delete/${id}`,
+    `${DOMAIN}/api/v1/article/article-delete/${id}`,
     {
       method: "DELETE",
       headers: {
