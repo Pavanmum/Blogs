@@ -3,9 +3,12 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require('cors')
 const logger = require("morgan");
-const path = require("path");
 const ErrorHandler = require("./utils/errorHandler");
+const path = require("path");
 require("dotenv").config();
+const connectDatabase = require("./database/dataBase");
+connectDatabase();
+
 const app = express();
 
 app.use(express.json());
@@ -28,14 +31,17 @@ const commentRoutes = require("./routes/commentRoutes");
 
 // Use Routes
 
-app.use('/api/v1', authRoutes);
-app.use('/api/v1/article', articleRoutes);
-app.use('/api/v1/comment', commentRoutes);
-
 app.get("/", (req, res) => { 
   app.use(express.static(path.resolve(__dirname, "frontend", "build"))); 
   res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html")); 
 }); 
+
+app.use('/api/v1', authRoutes);
+app.use('/api/v1/article', articleRoutes);
+app.use('/api/v1/comment', commentRoutes);
+
+
+
 
 
 
@@ -54,6 +60,19 @@ app.use((err , req , res ,next ) =>{
 
 })
 
+
+process.on("unhandledRejection", (err) => {
+  console.log(`Shutting down the server for ${err.message}`);
+  console.log(`Shutting down the server for unhandle promise rejection`);
+
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
+const server = app.listen(process.env.PORT, () => {
+  console.log(`server is running on port ${process.env.PORT}`);
+});
 
 
 module.exports = app;

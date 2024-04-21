@@ -1,7 +1,7 @@
 {
     "builds": [
       {
-        "src": "server.js",
+        "src": "app.js",
         "use": "@vercel/node"
       },
       {
@@ -10,5 +10,5 @@
       }
     ],
   
-    "rewrites": [{ "source": "/(.*)", "destination": "server.js" }]
+    "rewrites": [{ "source": "/(.*)", "destination": "app.js" }]
   }
