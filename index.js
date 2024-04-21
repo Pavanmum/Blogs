@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const cors = require('cors')
 const logger = require("morgan");
 const ErrorHandler = require("./utils/errorHandler");
-const path = require("path");
 require("dotenv").config();
 const connectDatabase = require("./database/dataBase");
 connectDatabase();
@@ -31,10 +30,7 @@ const commentRoutes = require("./routes/commentRoutes");
 
 // Use Routes
 
-app.get("/", (req, res) => { 
-  app.use(express.static(path.resolve(__dirname, "frontend", "build"))); 
-  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html")); 
-}); 
+ 
 
 app.use('/api/v1', authRoutes);
 app.use('/api/v1/article', articleRoutes);
