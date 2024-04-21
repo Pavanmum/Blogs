@@ -26,6 +26,7 @@ app.use(cookieParser());
 const authRoutes = require("./routes/authRoutes");
 const articleRoutes = require("./routes/articleRoutes");
 const commentRoutes = require("./routes/commentRoutes");
+const { default: mongoose } = require("mongoose");
 
 
 // Use Routes
@@ -44,10 +45,6 @@ app.get('/', (req, res) => {
     status: 'success',
     code: 200,
     message: 'Welcome To Blog api',
-    data:
-      mongoose.connection.readyState === 1
-        ? 'Connected to MongoDB'
-        : 'Not connected to MongoDB',
   };
 
   res.status(200).json(message);
