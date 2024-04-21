@@ -41,10 +41,12 @@ app.use('/api/v1/comment', commentRoutes);
 
 
 
+app.use(express.static(path.resolve(__dirname, "frontend", "build")));
+
 app.get("/", (req, res) => {
-  server.use(express.static(path.resolve(__dirname, "frontend", "build")));
   res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-  });
+});
+
 
 
 app.use((req, res, next) => {
