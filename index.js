@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require('cors')
 const logger = require("morgan");
+const path = require('path')
 const ErrorHandler = require("./utils/errorHandler");
 require("dotenv").config();
 const connectDatabase = require("./database/dataBase");
@@ -26,7 +27,7 @@ app.use(cookieParser());
 const authRoutes = require("./routes/authRoutes");
 const articleRoutes = require("./routes/articleRoutes");
 const commentRoutes = require("./routes/commentRoutes");
-const { default: mongoose } = require("mongoose");
+
 
 
 // Use Routes
@@ -40,15 +41,10 @@ app.use('/api/v1/comment', commentRoutes);
 
 
 
-app.get('/', (req, res) => {
-  const message = {
-    status: 'success',
-    code: 200,
-    message: 'Welcome To Blog api',
-  };
-
-  res.status(200).json(message);
-});
+app.get("/", (req, res) => {
+  server.use(express.static(path.resolve(__dirname, "frontend", "build")));
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
 
 
 app.use((req, res, next) => {
@@ -76,9 +72,8 @@ process.on("unhandledRejection", (err) => {
   });
 });
 
-const server = app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, () => {
   console.log(`server is running on port ${process.env.PORT}`);
 });
 
 
-module.exports = app;
