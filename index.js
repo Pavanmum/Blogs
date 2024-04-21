@@ -1,11 +1,13 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const path = require("path");
 const cors = require('cors')
 const logger = require("morgan");
 const ErrorHandler = require("./utils/errorHandler");
 require("dotenv").config();
 const connectDatabase = require("./database/dataBase");
+
 connectDatabase();
 
 const app = express();
@@ -40,15 +42,12 @@ app.use('/api/v1/comment', commentRoutes);
 
 
 
-app.get('/', (req, res) => {
-  const message = {
-    status: 'success',
-    code: 200,
-    message: 'Welcome To Blog api',
-  };
 
-  res.status(200).json(message);
-});
+
+app.use(express.static(path.resolve(__dirname, "frontend", "build")));
+  app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
 
 
 app.use((req, res, next) => {
